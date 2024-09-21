@@ -1,0 +1,67 @@
+<%- include("component/headers.ejs") %>
+    <main class="w-[90%] mx-auto my-4">
+        <h1 class="text-center text-2xl text-blue-700 font-bold underline">Register</h1>
+        <div class="max-w-sm mx-auto bg-white shadow-xl p-4">
+            <div class="mb-5">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900">
+                    name</label>
+                <input type="text" id="name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                    placeholder="name" required />
+            </div>
+            <div class="mb-5">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900">
+                    password</label>
+                <input type="password" id="password" placeholder="password"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    required />
+            </div>
+            <div class="mb-5">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900">
+                    confirm system</label>
+                <input type="password" id="confirm" placeholder="confirm system"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    required />
+            </div>
+            <div class="mt-4 w-full mx-auto flex justify-center gap-2">
+                <button id="submit"
+                    class="text-white w-[300px] mx-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+                    regis
+                </button>
+            </div>
+            <div class="mt-4 w-full mx-auto flex justify-center gap-2">
+                Sudah punya akun ?
+                <a href="/login" class="text-blue-700 text-center underline">
+                    Login
+                </a>
+            </div>
+        </div>
+    </main>
+    <script>
+        $(document).ready(() => {
+            $("#submit").click(() => {
+                const name = $("#name").val();
+                const password = $("#password").val();
+                const confirm = $("#confirm").val();
+                if (!name || !password) return alert("Please enter a name and password")
+                $.ajax({
+                    url: "/api/regis",
+                    method: "POST",
+                    data: JSON.stringify({ name, password, confirm: confirm }),
+                    processData: true,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: (response) => {
+                        console.log(response)
+                        alert(response.message)
+                        window.location.href = "/"
+                    },
+                    error: (error) => {
+                        console.log(error);
+                        alert("Failed to register")
+                    }
+                })
+            })
+        })
+    </script>
+    <%- include("component/footer.ejs") %>
