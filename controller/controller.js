@@ -123,7 +123,6 @@ const EditAccount = async (req, res) => {
         console.log(category);
         const findemail = await User.findOne({ email: user.email })
         await Account.findOneAndUpdate({
-
             _id: req.params.id,
         }, {
             email: email,
@@ -132,7 +131,7 @@ const EditAccount = async (req, res) => {
             orderDate: orderdate,
             status: status,
             expiredDate: expireddate,
-            category: category,
+            category: "",
             status: status,
             parent: user._id,
         })

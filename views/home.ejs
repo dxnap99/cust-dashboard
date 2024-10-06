@@ -133,10 +133,10 @@
                                 <%= items.status %>
                             </td>
                             <td class="px-6 py-4">
-                                <%= items.orderDate %>
+                                <%= new Date(items.orderDate).toLocaleString() %>
                             </td>
                             <td class="px-6 py-4">
-                                <%= items.expiredDate %>
+                                <%= new Date(items.expiredDate).toLocaleString() %>
                             </td>
                             <td class="px-6 py-4 flex gap-3">
                                 <a href="/editaccount/<%= items._id %>"
