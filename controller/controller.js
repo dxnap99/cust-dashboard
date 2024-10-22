@@ -120,7 +120,6 @@ const EditAccount = async (req, res) => {
     try {
         const user = JSON.parse(req.cookies["user"])
         const { email, password, groupname, orderdate, expireddate, category, status } = req.body
-        console.log(category);
         const findemail = await User.findOne({ email: user.email })
         await Account.findOneAndUpdate({
             _id: req.params.id,
@@ -131,7 +130,7 @@ const EditAccount = async (req, res) => {
             orderDate: orderdate,
             status: status,
             expiredDate: expireddate,
-            category: "",
+            category: category,
             status: status,
             parent: user._id,
         })
